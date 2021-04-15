@@ -1,0 +1,33 @@
+﻿@model IEnumerable<ComicBookStore.Models.ComicInfo>
+
+@{
+    ViewData["Title"] = "AllComics";
+}
+
+<h1 class="heading-font text-center">All Comics</h1>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 border-primary">
+                <img src="~/photos/@item.ComicID@item.Extension" alt="" style="width:100%">
+                <div class="card-body">
+                    <h4 class="card-title font1">
+                        @Html.DisplayFor(modelItem => item.ComicName)
+                    </h4>
+                    <h5 class="font2">@Html.DisplayFor(modelItem => item.CompanyComic.CompanyName)</h5>
+                    <h5 class="font2">Price: $ @Html.DisplayFor(modelItem => item.Price)</h5>
+                    <h5 class="font2">Number of Pages: @Html.DisplayFor(modelItem => item.Pages)</h5>
+                </div>
+                <div class="card-footer">
+                    <p>
+                        <a class="btn btn-success" asp-action="ViewComicDetails" asp-route-id="@item.ComicID">View Comic Details</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    }
+</div>

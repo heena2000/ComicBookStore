@@ -1,0 +1,34 @@
+﻿@model ComicBookStore.Models.ComicOrder
+
+@{
+    ViewData["Title"] = "PlaceOrder";
+}
+
+<h1 class="heading-font text-center">Place Your Order</h1>
+<h2 class="text-center font1">@ViewData["ComicName"]</h2>
+    <hr />
+    <div class="row">
+        <div class="col-md-12">
+            <form asp-action="PlaceOrder">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Address" class="control-label"></label>
+                    <input asp-for="Address" class="form-control" />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Quantity" class="control-label"></label>
+                    <input asp-for="Quantity" class="form-control" />
+                    <span asp-validation-for="Quantity" class="text-danger"></span>
+                    <input asp-for="ComicID" type="hidden" value='@ViewData["ComicID"]' class="form-control" />
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Place Order" class="btn btn-success" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

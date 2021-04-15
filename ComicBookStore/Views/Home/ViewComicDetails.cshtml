@@ -1,0 +1,36 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@model ComicBookStore.Models.ComicInfo
+
+@{
+    ViewData["Title"] = "ViewComicDetails";
+}
+
+<h1 class="heading-font text-center">Comic Details</h1>
+
+<div class="row">
+    <div class="col-6">
+        <div class="card h-100 border-primary">
+            <img src="~/photos/@Model.ComicID@Model.Extension" alt="" style="width:100%">
+        </div>
+    </div>
+    <div class="col-6">
+        <h1 class="heading-font">@Model.ComicName</h1>
+        <h2 class="font2">@Model.CompanyComic.CompanyName</h2>
+        <h2 class="font2">@Model.CategoryComic.CategoryName</h2>
+        <h2 class="font2">$ @Model.Price</h2>
+        <h2 class="font2">@Model.Pages pages</h2>
+        <h2 class="font2">Description</h2>
+        <p class="font1">@Model.Description</p>
+        @if (SignInManager.IsSignedIn(User))
+        {
+    <a class="btn btn-success text-center" asp-action="PlaceOrder" asp-route-id="@Model.ComicID">Place Order</a>
+        }
+        else
+        {
+            <p class="heading-font">Please Login. For Placing Order.</p>
+        }
+    </div>
+</div>
